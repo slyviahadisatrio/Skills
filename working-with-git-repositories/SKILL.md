@@ -46,7 +46,17 @@ Standard merge commits. Do not rebase feature branches onto the main branch — 
 
 Semantic versioning: `v<major>.<minor>.<patch>`. No prerelease suffixes unless the project explicitly uses them. Tag releases on the main integration branch, not on feature branches.
 
-## 5. What NOT to Do
+## 5. Planning
+
+When writing an implementation plan (rather than executing directly), embed Git workflow details into the plan so the executing agent has explicit instructions to follow:
+
+- **Commit sequence** — list which steps get their own commit and provide the exact commit message for each. Follow the message format from section 1.
+- **Quality gate** — include the project's quality-gate command (e.g., `./gradlew check`, `npm test`) as an explicit verification step. The executing agent should run it before committing.
+- **Branch** — if the task requires a new branch, specify the branch name following section 2's conventions.
+
+These details must appear in the plan itself — do not assume the executing agent has access to this skill's conventions.
+
+## 6. What NOT to Do
 
 - Don't bundle unrelated changes in one commit — split them.
 - Don't write commit subjects in past tense ("Added", "Fixed") — use imperative mood ("Add", "Fix").
