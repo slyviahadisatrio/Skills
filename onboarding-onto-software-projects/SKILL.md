@@ -110,7 +110,7 @@ git submodule status
 
 ## 3. Explore the Project
 
-Use **AskUserQuestion** to decide the exploration approach:
+Use **AskUserQuestion** to decide the exploration approach — ask both questions before loading anything:
 
 ```
 questions:
@@ -121,11 +121,22 @@ questions:
         description: "I'll use contract-only exploration for maximum token efficiency"
       - label: "No / unsure"
         description: "I'll use standard exploration and read files more fully"
+  - question: "Does this project have well-tested code (descriptive test names, fakes, clear setup)?"
+    header: "Test Quality"
+    options:
+      - label: "Yes — well-tested"
+        description: "I'll use test-driven exploration to catalog behaviors and construction patterns"
+      - label: "No / unsure"
+        description: "I'll skip test-driven exploration and rely on other signals"
 ```
 
 **If well-documented:** load the `exploring-well-documented-code` skill via the Skill tool. Apply its contract-only technique throughout this step.
 
-**If not / unsure:** use standard exploration — read files with Glob, Grep, and Read tools, and delegate broader surveys to Explore subagents without contract-only constraints.
+**If well-tested:** load the `exploring-well-tested-code` skill via the Skill tool. Apply its test-driven technique throughout this step.
+
+**If both:** use both skills together — `exploring-well-documented-code` first for the architectural skeleton, then `exploring-well-tested-code` for behavioral depth and edge cases.
+
+**If neither:** use standard exploration — read files with Glob, Grep, and Read tools, and delegate broader surveys to Explore subagents without contract-only constraints.
 
 ### Exploration checklist
 
@@ -297,6 +308,7 @@ questions:
 
 - Don't write a shallow CLAUDE.md based on assumptions — explore first, ask when unclear.
 - Don't load `exploring-well-documented-code` without asking whether the project actually has documentation worth using.
+- Don't load `exploring-well-tested-code` without asking whether the project actually has well-named tests worth using.
 - Don't overwrite an existing `CLAUDE.md` or project-local skills without following the user's pre-flight decision.
 - Don't add the global AgentSkills submodule without asking.
 - Don't assume branch naming conventions — inspect the project's history first.
