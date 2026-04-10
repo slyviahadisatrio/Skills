@@ -59,7 +59,7 @@ Composition is the primary means to extend and control behavior.
 - No `*Utils`, `*Helper`, `*Manager`, `*Service` classes.
 - No data-only classes for objects that should own behavior.
 - No nullable types where a null object can exist.
-- No sealed classes/enums for polymorphism — use interface composition.
+- No sealed classes/enums for open polymorphism — use interface composition. Sealed types are appropriate for closed sum types where exhaustive matching is the intent (e.g., a fixed set of named states or reasons).
 - No annotation-driven frameworks inside domain logic.
 - No getter/setter methods — use language-native properties.
 - No base classes for code reuse — use composition.
